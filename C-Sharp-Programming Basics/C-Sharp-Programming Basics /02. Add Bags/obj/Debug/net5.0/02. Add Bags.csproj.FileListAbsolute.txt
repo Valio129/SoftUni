@@ -1,0 +1,22 @@
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\02. Add Bags.exe
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\02. Add Bags.deps.json
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\02. Add Bags.runtimeconfig.json
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\02. Add Bags.runtimeconfig.dev.json
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\02. Add Bags.dll
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\ref\02. Add Bags.dll
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\02. Add Bags.pdb
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.csproj.AssemblyReference.cache
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.AssemblyInfoInputs.cache
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.AssemblyInfo.cs
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.csproj.CoreCompileInputs.cache
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.dll
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\ref\02. Add Bags.dll
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.pdb
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\obj\Debug\net5.0\02. Add Bags.genruntimeconfig.cache
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\PB-Exam.deps.json
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\PB-Exam.runtimeconfig.json
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\PB-Exam.runtimeconfig.dev.json
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\PB-Exam.exe
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\PB-Exam.dll
+D:\Programming_Basics - C#\PB-Exam\02. Add Bags\bin\Debug\net5.0\PB-Exam.pdb
