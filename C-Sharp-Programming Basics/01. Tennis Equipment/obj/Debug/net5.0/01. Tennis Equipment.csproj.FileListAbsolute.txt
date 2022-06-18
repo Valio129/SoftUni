@@ -1,0 +1,15 @@
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\01. Tennis Equipment.exe
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\01. Tennis Equipment.deps.json
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\01. Tennis Equipment.runtimeconfig.json
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\01. Tennis Equipment.runtimeconfig.dev.json
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\01. Tennis Equipment.dll
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\ref\01. Tennis Equipment.dll
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\bin\Debug\net5.0\01. Tennis Equipment.pdb
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.AssemblyInfoInputs.cache
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.AssemblyInfo.cs
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.csproj.CoreCompileInputs.cache
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.dll
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\ref\01. Tennis Equipment.dll
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.pdb
+D:\Programming_Basics - C#\PB-Exam\01. Tennis Equipment\obj\Debug\net5.0\01. Tennis Equipment.genruntimeconfig.cache
