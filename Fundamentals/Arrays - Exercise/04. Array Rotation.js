@@ -1,0 +1,17 @@
+function rotation(array, num) {
+    let arr = [];
+    for (let i = 0; i < array.length; i++) {
+        arr.push(array[i]);
+    }
+
+    let temp;
+    for (let i = 1; i <= num; i++) {
+        temp = arr.shift();
+        arr.push(temp);
+    }
+    console.log(arr.join(" "));
+
+}
+rotation([51, 47, 32, 61, 21], 2)
+rotation([32, 21, 61, 1], 4)
+rotation([2, 4, 15, 31], 5)
