@@ -6,6 +6,7 @@ function radioCrystals(arr) {
         console.log(`Processing chunk ${currThickness} microns`);
         while (currThickness > desiredThickness) {
             let isxray = true
+            let operation = 0
             if (currThickness / 4 > desiredThickness) {
                 currThickness = currThickness.cut(currThickness, desiredThickness)
             } else if (currThickness - (currThickness * 0.2) > desiredThickness) {
@@ -21,65 +22,18 @@ function radioCrystals(arr) {
                 }
             }
 
+            currThickness = currThickness.loopOperation(currThickness, operation, desiredThickness)
+
         }
         console.log(`Finished crystal ${desiredThickness} microns`);
     }
 
-    function cut(currThickness, desiredThickness) {
-        let counter = 0
-        while ((currThickness / 4 > desiredThickness)) {
-            currThickness = currThickness.cut(currThickness).counter()
-            counter++
+   function loopOperation( result ,operation, end) {
+        while (operation < end) {
+            result = operation
         }
-        currThickness = currThickness.transportAndWash(currThickness);
-        console.log(`Cut x${counter}`);
-        return currThickness
-    }
-
-    function lap(currThickness, desiredThickness) {
-        let counter = 0
-        while (currThickness - (currThickness * 0.2) > desiredThickness) {
-            currThickness -= currThickness * 0.2
-            counter++
-        }
-        currThickness = currThickness.transportAndWash(currThickness);
-        c
-        console.log(`Lap x${counter}`);
-        return currThickness
-    }
-
-    function grind(currThickness, desiredThickness) {
-        let counter = 0
-        while (currThickness - 20 > desiredThickness) {
-            currThickness -= 20
-            counter++
-        }
-        currThickness = currThickness.transportAndWash(currThickness);
-        c
-        console.log(`Grind x${counter}`);
-        return currThickness
-    }
-
-    function etch(currThickness, desiredThickness) {
-        let counter = 0
-        while (currThickness - 2 > desiredThickness) {
-            currThickness -= 2
-            counter++
-        }
-        currThickness = currThickness.transportAndWash(currThickness);
-        c
-        console.log(`Etch x${counter}`);
-        return currThickness
-    }
-
-    function xray(thickness) {
-        thickness += 1
-        console.log(`X-ray x1`);
-        return thickness
-    }
-    function transportAndWash(thickness) {
-        return Math.random(thickness)
-    }
+        return result 
+   }
 
 
 
