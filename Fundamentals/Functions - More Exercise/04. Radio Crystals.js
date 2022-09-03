@@ -1,116 +1,87 @@
-function radioCrystals(arr) {
-    const desiredThickness = arr.shift()
-    let chunks = arr
-    for (currChunk of chunks) {
-        let isxray = true
-        let currThickness = currChunk
-        console.log(`Processing chunk ${currChunk} microns`);
-        let operation = "Cut"
-        if (operator(currThickness, operation, desiredThickness) > desiredThickness) {
-            currThickness = operator(currThickness, operation, desiredThickness, "y")
-        }
-        if ((operator(currThickness, "Lap", desiredThickness)) > operator(currThickness, "Grind", desiredThickness)) {
-            operation = "Lap"
-            if (operator(currThickness, operation, desiredThickness) > desiredThickness) {
-                currThickness = operator(currThickness, operation, desiredThickness, "y")
-            }
-            operation = "Grind"
-            if (operator(currThickness, operation, desiredThickness) > desiredThickness) {
-                currThickness = operator(currThickness, operation, desiredThickness, "y")
-            }
-        } else {
-            operation = "Grind"
-            if (operator(currThickness, operation, desiredThickness) > desiredThickness) {
-                currThickness = operator(currThickness, operation, desiredThickness, "y")
-            }
-            operation = "Lap"
-            if (operator(currThickness, operation, desiredThickness) > desiredThickness) {
-                currThickness = operator(currThickness, operation, desiredThickness, "y")
-            }
-        }
-        operation = "Etch"
-        if (operator(currThickness, operation, desiredThickness)  > desiredThickness) {
-            currThickness = operator(currThickness, operation, desiredThickness, "y")
-        }
-        if (currThickness - desiredThickness < 1) {
-            if (isxray) {
-                currThickness += 1
-                console.log('X-ray x1')
-                isxray = false
-            }
-        }
+function monitorCrystals(arr) {
+    let ores = arr
+    let targetMicrons = ores.shift()
+    for (let chunk of ores) {
+        let microns = chunk
+        console.log(`Processing chunk ${microns} microns `);
+        let operations = ["Cut", "Lap", "Grind", "Etch"]
+        let isXavailable = true
+        while (microns != targetMicrons) {
+            const recommendedAction = recommendAction(operations, microns)
+            let times = 0
+            let compare = targetMicrons
+            if (recommendedAction === "Etch") {
+                while (operate(recommendedAction, microns) >= targetMicrons - 1) {
+                    microns = operate(recommendedAction, microns)
+                    times++
+                }
+            } else {
 
-        console.log(`Finished crystal ${currThickness} microns`);
+                while (operate(recommendedAction, microns) >= targetMicrons) {
+                    microns = operate(recommendedAction, microns)
+                    times++
+                }
+            }
+
+            if (times > 0) {
+                microns = Math.floor(microns)
+                console.log(`${recommendedAction} x${times}`);
+
+                console.log("Transporting and washing");
+            }
+            // console.log(microns);
+            operations.splice(operations.indexOf(recommendedAction), 1)
+            if (targetMicrons > microns) {
+                if (isXavailable === true) {
+                    microns += 1
+                    console.log('X-ray x1');
+                    isXavailable = false
+                }
+            }
+        }
+        console.log(`Finished crystal ${microns} microns`);
+
+    }
+    function recommendAction(list, currentValue) {
+        let returnedAction;
+        let smallest = Number.MAX_VALUE;
+        for (action of list) {
+            const resultFromCurrAction = operate(action, currentValue)
+            if (resultFromCurrAction < smallest) {
+                smallest = resultFromCurrAction
+                returnedAction = action
+            }
+        }
+        return returnedAction
+
     }
 
-    function operator(startValue, operation, endValue, count) {
-        let counter = 0
-        let result = startValue
-        while (calc(result, operation) > endValue || calc((result + 1), operation) >= endValue) {
-            result = calc(result, operation)
-            counter++
-        }
-
-        Math.floor(result)
-
-        if (count === "y") { console.log(`${operation} x${counter}`); }
-        return result
-    }
-
-    function calc(num, operator) {
-        let numResult;
-        switch (operator) {
-            case 'Lap':
-                numResult = num - (num * 0.2)
+    function operate(operation, microns) {
+        const command = operation
+        let result = microns;
+        switch (operation) {
+            case "Cut":
+                result /= 4
                 break;
-            case 'Cut':
-                numResult = num / 4
+            case "Lap":
+                result -= result * 0.2
                 break;
-            case 'Grind':
-                numResult = num - 20
+            case "Grind":
+                result -= 20
                 break;
-            case 'Etch':
-                numResult = num - 2
+            case "Etch":
+                result -= 2
+                break;
             default:
                 break;
         }
-        return numResult
+        return result
     }
-
 }
-radioCrystals([1375, 50000])
-/*
+monitorCrystals([1375, 50000])
+console.log('===================');
+monitorCrystals([1000, 4000, 8100])
 
+// check if times > 0 => print times and math floor
+//if is "Etch" => target -= 1 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-if (curr(condition) > desired) {
-    do function
-}
-
-function {
-    while its possible{
-        decrement curr
-        call function counter
-    }
-    washt&move
-    console.log(counter);
-    return final product  
-}
-function counter {              / - it is global/
-    increment
-    return value    
-}
-*/
