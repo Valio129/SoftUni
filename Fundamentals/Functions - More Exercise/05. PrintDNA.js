@@ -37,7 +37,6 @@ function printDNA(num) {
                 break;
         }
         index += 2
-
         if (index === letters.length) {
             index = 0
         }
