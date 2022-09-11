@@ -1,12 +1,11 @@
-function mySort(arr) {
-    let resultArr = arr.slice(0).sort()
-    // let resultArr = []
-    // for (let index = 0; resultArr.length !== numArr.length; index++) {
-    //     const elt = numArr.length - 1 - index
-    //     resultArr.push(numArr[index])
-    //     resultArr.push(numArr[elt])
-    // }
-    console.log(resultArr.join(' '));
+function solve(input) {
+    let array = input.sort((a, b) => b - a)
+    let out = []
+    while (array.length > 0) {
+        out.push(array[0])&& array.shift()
+        out.push(array[array.length-1]) && array.pop();
+    }
+    console.log(out.join(' '));
 }
-mySort([1, 21, 3, 52, 69, 63, 31, 2, 18, 94])
-mySort([34, 2, 32, 45, 690, 6, 32, 7, 19, 47])
+solve([1, 21, 3, 52, 69, 63, 31, 2, 18, 94])
+solve([34, 2, 32, 45, 690, 6, 32, 7, 19, 47])
