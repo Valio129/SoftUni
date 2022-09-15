@@ -1,58 +1,49 @@
-function solve(nums, commands) {
-    for (let el of commands) {
-        el = el.split(' ')
-        let action = el.shift()
-        el = el.map(Number)
-        switch (action) {
+function arrManipulate(nums, commandsArr) {
+
+    // console.log(commandsArr);
+    for (let element of commandsArr) {
+        element = element.split(' ')
+        let command = element.shift()
+        element = element.map(Number)
+        let index = element.shift()
+        switch (command) {
             case 'add':
-                nums.splice(el[0], 0, el[1])
+                nums.splice(index, 0, element[0])
                 break;
             case 'addMany':
-                nums.splice(el.shift(), 0, ...el)
+                nums.splice(index, 0, ...element)
                 break;
             case "contains":
-                const i = nums.indexOf(el[0])
-                console.log(i)
+                console.log(nums.indexOf(index));
                 break;
             case "remove":
-                nums.splice(el[0], 1)
+                nums.splice(index, 1)
                 break;
             case "shift":
-                for (let index = el[0]; index > 0; index--) {
-                    let a = nums.shift()
-                    nums.push(a)
+                for (let i = 0; i < index; i++) {
+                    nums.push(nums.shift())
                 }
                 break;
             case "sumPairs":
-                let res = []
-                while (nums.length > 0) {
-                    let a = nums.shift()
-                    let b = nums.shift()
-                    res.push(a + b)
-                    if (b === undefined || b === NaN) {
-                        res.push(a)
-                        break;
+                let sum = []
+                let ind = 0
+                for (let i = 0; i < nums.length / 2; i++) {
+                    if (typeof nums[ind + 1] !== 'number') {
+                        nums[ind + 1] = 0
                     }
+                    sum.push(nums[ind] + nums[ind + 1])
+                    ind += 2
                 }
-                nums = res.slice(0)
+                nums = sum.slice(0)
                 break;
             case "print":
                 console.log(`[ ${nums.join(', ')} ]`);
                 return;
-                break;
             default:
                 break;
         }
     }
-
 }
-// solve([1, 2, 4, 5, 6, 7],
-
-//     ['add 1 8', 'contains 1', 'contains 3', 'print'])
-solve([1, 2, 3, 4, 5],
-
-    ['addMany 5 9 8 7 6 5', 'contains 15', 'remove 3', 'shift 1', 'print'])
-
-
-    // [ 2, 3, 5, 5, 9, 8, 7, 6, 5, 1 ]
-    // [ 2, 3, 5, 9, 8, 7, 6, 5, 1 ]
+arrManipulate([1, 2, 4, 5, 6, 7], ['add 1 8', 'contains 1', 'contains 3', 'print'])
+arrManipulate([1, 2, 3, 4, 5], ['addMany 5 9 8 7 6 5', 'contains 15', 'remove 3', 'shift 1', 'print'])
+arrManipulate([2, 2, 4, 2, 4], ["add 1 4", "sumPairs", "print"])
