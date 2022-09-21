@@ -9,7 +9,7 @@ function solve(arr) {
         let bombCol = bombCells[i][1]
         let bombValue = matrix[bombRow][bombCol]
         if (bombValue < 0) {
-            continue
+            continue;
         }
         let startRow = Math.max(0, bombRow - 1);
         let endRow = Math.min(bombRow + 1, arr.length - 1);
