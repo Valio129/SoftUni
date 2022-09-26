@@ -1,9 +1,9 @@
 function nextDay(year, month, day) {
+    let date = new Date(year, month - 1, day + 1)
+    date = date.toLocaleDateString()
+    date = date.split('/')
 
-    let out = new Date(year, month, day)
-    out.setHours(0, 0, 0, 0);
-    
-    console.log(out)
+    console.log(`${date[2]}-${date[0]}-${date[1]}`)
 }
 
-nextDay(2020, 3, 30)
+nextDay(2020, 3, 32)
