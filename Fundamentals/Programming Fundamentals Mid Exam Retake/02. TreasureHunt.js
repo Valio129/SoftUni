@@ -6,7 +6,7 @@ function solve(input) {
         switch (command) {
             case 'Loot':
                 for (let item of operation) {
-                    if (chest.includes(item) === false) {
+                    if (!chest.includes(item)) {
                         chest.unshift(item);
                     }
                 }
@@ -22,10 +22,9 @@ function solve(input) {
             case 'Steal':
                 let stolen = [];
                 if (Number(operation[0]) >= chest.length) {
-                    for (let index = 0; index < chest.length; index++) {
-                        let item = chest.pop()
+                    for (let item of chest) {
                         stolen.push(item);
-
+                        chest = []
                     }
                 } else {
                     for (let index = 0; index < Number(operation[0]); index++) {
@@ -33,8 +32,8 @@ function solve(input) {
                         stolen.push(item);
 
                     }
+                    stolen = stolen.reverse();
                 }
-                stolen = stolen.reverse();
                 console.log(stolen.join(', '));
                 break;
             default:
@@ -54,25 +53,25 @@ function solve(input) {
     }
 
 }
-// solve(["Gold|Silver|Bronze|Medallion|Cup",
+solve(["Gold|Silver|Bronze|Medallion|Cup",
 
-//     "Loot Wood Gold Coins",
+    "Loot Wood Gold Coins",
 
-//     "Loot Silver Pistol",
+    "Loot Silver Pistol",
 
-//     "Drop 3",
+    "Drop 3",
 
-//     "Steal 3",
+    "Steal 3",
 
-//     "Yohoho!"])
-solve(["Diamonds|Silver|Shotgun|Gold",
+    "Yohoho!"])
+// solve(["Diamonds|Silver|Shotgun|Gold",
 
-    "Loot Silver Medals Coal",
+//     "Loot Silver Medals Coal",
 
-    "Drop -1",
+//     "Drop -1",
 
-    "Drop 1",
+//     "Drop 1",
 
-    "Steal 6",
+//     "Steal 6",
 
-    "Yohoho!"]) 
+//     "Yohoho!"]) 
