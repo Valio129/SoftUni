@@ -11,7 +11,7 @@ function solve(array) {
             case 'Shoot':
                 if (index >= 0 && index < targets.length) {
                     targets[index] -= value;
-                    if (targets[index] < 0) {
+                    if (targets[index] <= 0) {
                         targets.splice(index, 1)
                     }
                 }
