@@ -1,24 +1,25 @@
 //get data from arr and put it into the obj,
 //then push the object into the heros arr
-//sort arr by level in ascending order 
-// 
+//sort the objects by their level and push them into the array
 function heroesStats(heroDataLis) {
     let heroesList = []
     for (let line of heroDataLis) {
         let [name, level, items] = line.split(' / ')
-        let hero = { name, level, items }
+        let hero = { name, level: Number(level), items }
         heroesList.push(hero);
     }
-}
-function compareLevels(a, b) {
-    let keyA = a.level
-    let keyB = b.level
-    return keyA - keyB;
-}
-heroesList = heroesList.sort(compareLevels)
+    heroesList.sort((a, b) => a.level - b.level);
+
+    heroesList.forEach(hero => {
+        console.log(`Hero: ${hero.name}`);
+        console.log(`level => ${hero.level}`);
+        console.log(`items => ${hero.items}`);
+    })
 
 
-console.log(heroesList);
+}
+
+
 
 
 heroesStats([
