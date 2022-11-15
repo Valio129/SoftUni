@@ -2,28 +2,28 @@
  * take first el from token and check it's type 
  */
 function partyList(guestsArr) {
-    let guests = new Map()
+    let vipList = []
+    let regularList = []
+
     let guestAssign = guestsArr.slice(0, guestsArr.indexOf('PARTY'))
     guestAssign.forEach(guestID => {
-        let first = guestID.charCodeAt(0)
-        if (first >= 48 && first <= 57) {
-            guests.set(guestID, 'VIP')
+        let first = guestID[0]
+        // isNaN() -> 
+        if (isNaN(first)) {
+            regularList.push(guestID)
         } else {
-            guests.set(guestID, 'regular')
+            vipList.push(guestID)
         }
 
     });
+    let guests = vipList.concat(regularList)
     for (const guest of guestsArr.slice(guestsArr.indexOf('PARTY') + 1)) {
-        guests.delete(guest)
-
-    }
-    let sorted = Array.from(guests.entries()).sort(([anum, arole], [bnum, brole]) => {
-        return arole.localeCompare(brole)
-    }
-    )
-    console.log(sorted.length);
-    for (const iterator of sorted) {
-        console.log(iterator[0]);
+        let index = guests.indexOf(guest)
+        guests.splice(index, 1)
+        }
+    console.log(guests.length);
+    for (const iterator of guests) {
+        console.log(iterator);
     }
 
 

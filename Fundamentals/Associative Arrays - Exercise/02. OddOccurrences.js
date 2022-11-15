@@ -1,9 +1,6 @@
 function solve(sentance) {
     sentance = sentance.toLowerCase().split(' ')
-
     let obj = new Map()
-
-
     for (const el of sentance) {
         if (obj.has(el)) {
             obj.set(el, obj.get(el) + 1)
