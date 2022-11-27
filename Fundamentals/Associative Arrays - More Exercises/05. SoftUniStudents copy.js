@@ -16,30 +16,51 @@ function solveStudents(input) {
          *              }
          */
     }
+    let users = {}
     for (let token of input) {
         if (token.split(': ').length == 2) {
             let [courseName, curCapacity] = token.split(': ')
             curCapacity = Number(curCapacity)
             //check if name is present in Obj
             if (coursesObj.hasOwnProperty(courseName)) {
-                curCapacity += coursesObj.courseName.capacity
+                curCapacity += coursesObj[courseName].capacity
                 coursesObj[courseName].capacity = curCapacity
             } else {
 
-                coursesObj[courseName] = { curCapacity, users: [] }
+                coursesObj[courseName] = { capacity: curCapacity, users: [] }
             }
         } else {
             token = token.split(' ')
-            const user = token[0]
+            let user = token[0]
+            user = user.split('[')
+            let credits = Number(user[1].substring(0, user[1].indexOf(']')))
+            user = user[0]
             const email = token[3]
             const courseName = token[token.length - 1]
-            if (courses.includes(obj => obj.courseName === courseName)) {
-                let index = courses.indexOf(el => el.courseName === courseName)
-                let courseObj = courses[index]
-
+            if (coursesObj.hasOwnProperty(courseName) && coursesObj[courseName].capacity > 0) {
+                coursesObj[courseName].capacity -= 1
+                coursesObj[courseName].users.push(user)
+                users[user] = { email, credits }
             }
+
             console.log();
         }
+    }
+    // +++ SORING PART
+    let sortedCourses = Array.from(Object.keys(coursesObj))
+        .sort((a, b) => {
+            let A = coursesObj[a].users.length
+            let B = coursesObj[b].users.length
+            return B - A
+        })
+    for (let course of sortedCourses) {
+        let sortedStudents = Array.from(coursesObj[course].users)
+            .sort((a, b) => {
+                let A = users[a].credits
+                let B = users[b].credits
+                return B - A
+            })
+            // TO DO: sort descending print credit ... check if sortedStudents has el's
     }
     console.log();
 
