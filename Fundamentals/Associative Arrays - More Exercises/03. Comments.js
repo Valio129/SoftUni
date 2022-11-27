@@ -50,13 +50,8 @@ function solve(input) {
         })
     for (const articleName of sortedArticles) {
         console.log(`Comments on ${articleName}`);
-        
-        let articleKeys = Array.from(articles.keys())
-            .sort((firstArticleName, secondArticleName) => {
-              let sortedNamesBySizeA = articles.get(firstArticleName).sort((a, b) => a[1][1] - b[1][1])
-              let sortedNamesBySizeB = articles.get(secondArticleName).sort((a, b) => a[1][1] - b[1][1])
-                
-            })
+        let articleKeys = Array.from(articles.get(articleName).keys())
+            .sort((a, b) => b.localeCompare(a))
 
         for (const user of articleKeys) {
             const title = articles.get(articleName).get(user)[0]
