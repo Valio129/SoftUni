@@ -1,15 +1,32 @@
 function solveStudents(input) {
-    let courses = []
+    let coursesObj = {
+        /**
+         * usersObj = {
+         *  username: { 
+         *  email:, credits
+         * }
+         * }
+         * courseName: courseObj
+         *          couseObj {
+         *             
+         *              cap: (Number, decreasing useing If (> 0))
+         *               users : Map {
+         *                  usernameKey: [email, credits]                    
+         *                    }                     
+         *              }
+         */
+    }
     for (let token of input) {
         if (token.split(': ').length == 2) {
-            let [courseName, capacity] = token.split(': ')
-            capacity = Number(capacity)
-            if (!courses.includes(obj => obj.courseName === courseName)) {
-                let courseObj = { courseName, capacity }
-                courses.push(courseObj)
+            let [courseName, curCapacity] = token.split(': ')
+            curCapacity = Number(curCapacity)
+            //check if name is present in Obj
+            if (coursesObj.hasOwnProperty(courseName)) {
+                curCapacity += coursesObj.courseName.capacity
+                coursesObj[courseName].capacity = curCapacity
             } else {
-                courses[courses.indexOf(el.courseName === courseName)].capacity += capacity
-                // courses[courses.indexOf(el.courseName === courseName)] = {courseName, (capacity + curCap)}
+
+                coursesObj[courseName] = { curCapacity, users: [] }
             }
         } else {
             token = token.split(' ')
@@ -17,7 +34,7 @@ function solveStudents(input) {
             const email = token[3]
             const courseName = token[token.length - 1]
             if (courses.includes(obj => obj.courseName === courseName)) {
-                let index = courses.indexOf( el => el.courseName === courseName)
+                let index = courses.indexOf(el => el.courseName === courseName)
                 let courseObj = courses[index]
 
             }
