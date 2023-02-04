@@ -20,7 +20,7 @@ function enigma(array) {
 
         if (lineReg.test(line)) {
             let out = lineReg.exec(line)
-
+            
             const attack = out.groups.attackType
             const planetName = out.groups.planetName
             if (attack === 'A') {
