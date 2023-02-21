@@ -1,19 +1,14 @@
-function getTimeToWalk(steps, length, speed) {
-    //  crate totalTime in minutes
-    //  to get the rest minutes -> meters / 500
-    //  meters /= 1000 to get the value in kilomters
-    //   s = v*t; t = s/v - get the time in kilometers
-    //   t *= 60, totalTime += t
-    //print time  
-    let totalTimeSeconds = 0;
-    const restMinutes = steps / 500;
-    const lentgthKm = length / 1000;
-    const timeInHours = (lentgthKm / speed);
-    totalMinutes += timeInHours * 60;
-    console.log(totalMinutes);
-    const totalHours = totalMinutes / 60;
-    const totalSeconds = totalMinutes * 60;
-    console.log(`${totalHours}:${totalMinutes}:${totalSeconds}`);
+function getTimeToWalk(steps, footprint, speedKmH) {
+    let distance = footprint * steps;
+    let speed = speedKmH * 1000 / 3600;
+    let rest = Math.floor(distance / 500) * 60;
+    let time = (distance / speed) + rest;
+    
+    let hours = Math.floor(time / 3600).toFixed(0).padStart(2, '0');;
+    let minutes = Math.floor(time / 60).toFixed(0).padStart(2, '0');;
+    let seconds = (time % 60).toFixed(0).padStart(2, '0');
+
+    console.log(`${hours}:${(minutes)}:${seconds}`);
 
 }
-getTimeToWalk(4000, 0.60, 5);
+getTimeToWalk(2564, 0.70, 5.5);
