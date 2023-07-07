@@ -1,26 +1,33 @@
 function solve(inputArr) {
-
-    inputArr = inputArr.map(arr => arr.split(' '));
-    for (let arr of inputArr) {
-        arr = arr.map(Number);
-    }
-
-
+    //Converting the input el's to numbers
+    let matrix = inputArr.map(arr => arr = arr.split(' '));
+    matrix.forEach((line, index) => {
+        matrix[index] = matrix[index].map(Number);
+    });
     let mainDiagSum = 0;
     let secDiagSum = 0;
-    //TAKING MAIN DIAG SUM
-    for (let i = 0; i < inputArr.length; i++) {
-        mainDiagSum += inputArr[i][i];
+    let col = matrix[0].length - 1;
+    for (let row = 0; row < matrix.length; row++) {
+        //TAKING MAIN DIAG SUM
+        mainDiagSum += matrix[row][row];
+        //TAKING second DIAG SUM
+        let el = matrix[row][col];
+        secDiagSum += el;
+        col--;
     }
-    //TAKING second DIAG SUM
-    for (let row = inputArr.length - 1; row >= 0; row--) {
-        for (let col = 0; col < inputArr.length; col++) {
-            let el = inputArr[row][col];
-            if (row === col) {
-                secDiagSum += el;
+    console.log();
+     col = matrix[0].length - 1;
+    if (mainDiagSum == secDiagSum) {
+        for (let row = 0; row < matrix.length; row++) {
+            for (let column = 0; column < row.length; column++) {
+                if (row !== column) {
+                    if (column !== col) {
+                        matrix[row][column] = secDiagSum;     
+                    }
+                }
             }
+            col--;
         }
-
     }
     console.log();
 }
