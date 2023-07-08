@@ -15,30 +15,30 @@ function solve(inputArr) {
         secDiagSum += el;
         col--;
     }
-    console.log();
-     col = matrix[0].length - 1;
+    col = matrix[0].length - 1;
     if (mainDiagSum == secDiagSum) {
+        //Set other elements to the sum
         for (let row = 0; row < matrix.length; row++) {
-            for (let column = 0; column < row.length; column++) {
+            for (let column = 0; column < matrix[row].length; column++) {
                 if (row !== column) {
                     if (column !== col) {
-                        matrix[row][column] = secDiagSum;     
+                        matrix[row][column] = secDiagSum;
                     }
                 }
             }
             col--;
         }
     }
-    console.log();
+    //output
+    matrix.forEach(line => console.log(line.join(' ')));
 }
 solve(['5 3 12 3 1',
     '11 4 23 2 5',
     '101 12 3 21 10',
     '1 4 5 2 2',
     '5 22 33 11 1']);
-solve(
-    ['1 1 1',
-        '1 1 1',
-        '1 1 0']
-
-);
+// solve(
+//     ['1 1 1',
+//         '1 1 1',
+//         '1 1 0']
+// );
