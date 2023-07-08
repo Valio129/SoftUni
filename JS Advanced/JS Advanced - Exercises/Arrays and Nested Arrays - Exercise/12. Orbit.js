@@ -1,33 +1,20 @@
 function solve(input) {
-    function isFull(table) {
-        let out = false;
-        for (const row of table) {
-            if (!row.includes(undefined)) {
-                out = true;
-            }
+    let rows = input[0];
+    let cols = input[1];
+    let starRow = input[2];
+    let starCol = input[3];
+ 
+    let matrix = [];
+    for(let i=0; i<rows; i++) {
+        matrix.push([]);
+    }
+ 
+    for(let row = 0; row< rows; row++) {
+        for(let col=0; col<cols; col++) {
+            matrix[row][col] = Math.max(Math.abs(row - starRow), Math.abs(col - starCol)) + 1;
         }
-        return out;
     }
-
-    let [w, h, x, y] = input;
-    //  create matrix and get starting point
-    //  create orbit with init value + 1 on every iteration +1 
-    //  orbit has offset which increments by 1 on every iteration
-
-    let matrix = new Array(w);
-    for (let i = 0; i < matrix.length; i++) {
-        matrix[i] = new Array(h);
-    }
-    let orbitValue = 1;
-    let orbitOffset = 1;
-    matrix[x][y] = orbitValue;
-    while (isFull(matrix) == false) {
-        let xOffset = orbitOffset;
-        let yOffset = orbitOffset;
-        matrix[yOffset].fill(orbitValue, (x - xOffset), (x + xOffset));
-        orbitOffset++;
-        orbitValue++;
-    }
-    console.log();
+ 
+    console.log(matrix.map(row => row.join(" ")).join("\n"));
 }
 solve([4, 4, 0, 0]);
