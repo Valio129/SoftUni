@@ -13,9 +13,11 @@ function spiralMatrix(m, n) {
     // filling the elements
     let x = 0;
     let y = 0;
-    let step = 0;
+    let step = 0; // used to update the starting point
     for (let i = 0; i < totalSize;) {
+
         i++;
+        // moving along Y - horizontal
         while (y + step < n - step) {
             matrix[x + step][y + step] = i;
             y++;
@@ -23,6 +25,7 @@ function spiralMatrix(m, n) {
         }
         y--;
         x++;
+         // moving along X - vertical
         while (x + step < m - step) {
             matrix[x + step][y + step] = i;
             x++;
@@ -30,6 +33,7 @@ function spiralMatrix(m, n) {
         }
         x--;
         y--;
+        // - horizontal return
         while (y + step >= step) {
             matrix[x + step][y + step] = i;
             i++;
@@ -37,6 +41,7 @@ function spiralMatrix(m, n) {
         }
         y++;
         x--;
+        // vertical return
         while (x + step > step) {
             matrix[x + step][y + step] = i;
             i++;
