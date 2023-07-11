@@ -28,6 +28,7 @@ function solve() {
             parts: ['play']
         }
     ];
+    // Beginning of the solution
     function factory(libObj, ordArr) {
         let record = [];
         for (const elObject of ordArr) {
@@ -43,6 +44,7 @@ function solve() {
         }
         return record;
     }
+    // end 
     const products = factory(library, orders);
     console.log(products);
 
