@@ -10,7 +10,7 @@ function spiralMatrix(m, n) {
         matrix.push(line);
     }
     // iterating through the matrix
-    // filling the elements
+    // filling with elements
     let x = 0;
     let y = 0;
     let step = 0; // used to update the starting point
