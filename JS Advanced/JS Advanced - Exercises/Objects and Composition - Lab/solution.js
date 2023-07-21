@@ -1,31 +1,42 @@
 function fromJSONToHTMLTable(inputArr) {
     let output = '<table>';
     let arr = JSON.parse(inputArr);
-    let tRowsArr = [];
-    for (const objEL of arr) {
-        for (let heading of Object.keys(objEL)) {
+    function escape(htmlStr) {
+        return htmlStr.replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 
-            if (typeof heading == "string") {
-                heading = heading.substring(1, heading.length - 2);
-            }
-            tRowsArr.push(`<th>${heading}</th>`);
-
-        }
-        for (let key of Object.values(objEL)) {
-            
-            if (typeof key == "string") {
-                key = key.substring(1, key.length - 2);
-            }
-            
-           tRowsArr.push(`<td>${key}</td>`);
-        }
     }
-    output += '</table>';
+    // check for special sybols
+    // get only the keys of the objects as headings
+    output += `\n`;
+    output += `   <tr>`;
+    for (const heading of Object.keys(arr[0])) {
+        if (typeof heading == 'string') {
+            escape(heading);
+        }
+        output += `<th>${(heading)}</th>`;
+    }
+    output += `</tr>\n`;
+    //  for every other line get only the keys of the object 
+    for (const obj of arr) {
+        output += `   <tr>`;
+        for (const value of Object.values(obj)) {
+            if (typeof value == 'string') {
+                escape(value);
+            }
+            output += `<td>${value}</td>`;
+        }
+        output += `</tr>\n`;
+    }
+    output += '</table>\n';
     return output;
 }
 fromJSONToHTMLTable(`[{"Name":"Pesho",
 "Score":4,
-" Grade":8},
+"Grade":8},
 {"Name":"Gosho",
 "Score":5,
 " Grade":8},
