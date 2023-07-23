@@ -1,4 +1,4 @@
-//{productName} -> {productLowestPrice} ({townName})     OUTPUT placeholder
+//{productName} -> {productLowestPrice} ({townName}) OUTPUT placeholder
 // " | " delimeter
 function lowestPice(input) {
     let towns = { lowestPrice: {} };
@@ -10,14 +10,18 @@ function lowestPice(input) {
         }
         towns[cityName][product] = price;
         if (!towns.lowestPrice.hasOwnProperty(product)) {
-            towns.lowestPrice[product] = {price, cityName};
+            towns.lowestPrice[product] = { price, cityName };
         } else if (towns.lowestPrice[product].price > price) {
-            towns.lowestPrice[product] = {price, cityName}
+            towns.lowestPrice[product] = { price, cityName };
         }
     }
     const cheapestProductsLib = towns.lowestPrice;
-    for (const {productName : {prodPrice, prodTown}} in cheapestProductsLib) {
-        console.log(`${productName} -> ${prodPrice} (${prodTown}`);
+    // for (const [productName , prodData] of Object.entries(cheapestProductsLib)) {
+    //     const [prodPrice, prodTown] = Object.values(prodData);
+    //     console.log(`${productName} -> ${prodPrice} (${prodTown})`);
+    // }
+    for (const [productName, { cityName, price }] of Object.entries(cheapestProductsLib)) {
+        console.log(`${productName} -> ${price} (${cityName})`);
     }
 }
 lowestPice(['Sample Town | Sample Product | 1000',
