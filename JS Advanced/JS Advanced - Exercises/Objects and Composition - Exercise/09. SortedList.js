@@ -5,24 +5,24 @@ function solve() {
             // sortedArr: this.nums.sort((a, b) => a - b),
             size: 0,
             remove(index) {
-                let sortedArr = this.nums.sort((a, b) => a - b);
-                let indexValue = sortedArr[index];
-                let delIndex = this.nums.indexOf(indexValue);
-                if (delIndex <= this.nums.length - 1 || delIndex >= 0) {
-                    if (this.nums[delIndex] !== undefined) {
-                        this.nums.splice(delIndex - 1, 1);
+                if (index <= this.nums.length - 1 || index >= 0) {
+                    if (this.nums[index] !== undefined) {
+                        this.nums.splice(index, 1);
                         this.size--;
                     }
                 }
             },
             add(num) {
                 this.nums.push(num);
+                let sortedArr = this.nums.sort((a, b) => a - b);
+                this.nums = sortedArr.slice(0);
                 this.size++;
             },
             get(index) {
-                let sortedArr = this.nums.sort((a, b) => a - b);
-                if (index <= sortedArr.length - 1 || index >= 0) {
-                    return sortedArr[index];
+                if (index <= this.nums.length - 1 || index >= 0) {
+                    if (this.nums[index] !== undefined && typeof index == 'number') {
+                        return this.nums[index];
+                    }
                 }
             },
         };
@@ -34,6 +34,7 @@ function solve() {
     console.log(list.get(1));
     list.remove(1);
     console.log(list.get(1));
+    console.log();
 
 }
 solve();
