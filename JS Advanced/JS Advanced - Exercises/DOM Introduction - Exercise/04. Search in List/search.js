@@ -3,7 +3,8 @@ function search() {
    let textBoxEl = document.getElementById('searchText');
    let searchTown = textBoxEl.value;
    let resultEl = document.getElementById('result');
-   let matchesCounter = Number(resultEl.textContent.split(' ')[0]);
+   // let matchesCounter = Number(resultEl.textContent.split(' ')[0]);
+   let matchesCounter = 0;
    if (listEl.textContent.includes(searchTown)) {
       let townsArr = Array.from(document.getElementsByTagName('li'));
       console.log(townsArr);
@@ -14,10 +15,13 @@ function search() {
             townsArr[i].style.fontWeight = 'bold';
             townsArr[i].style.textDecoration = 'underline';
             matchesCounter++;
+         } else {
+            townsArr[i].style.fontWeight = 'normal';
+            townsArr[i].style.textDecoration = 'none';
          }
       }
    }
-   textBoxEl.value = '';
+   // document.getElementById('searchText').reset(); 
    resultEl.textContent = `${matchesCounter} matches found`;
 }
 
