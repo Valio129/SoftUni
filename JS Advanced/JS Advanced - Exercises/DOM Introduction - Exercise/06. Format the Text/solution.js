@@ -2,7 +2,7 @@ function solve() {
   let inputText = document.getElementById('input').value;
   let sentancesArr = inputText.split('.');
   // sentancesArr.pop();
-  sentancesArr = sentancesArr.filter(x=> x!== '\n').filter(x=> x!== '');
+  sentancesArr = sentancesArr.filter(x => x !== '\n').filter(x => x !== '');
   console.log(sentancesArr);
   let outputArr = [];
   let currParr = [];
@@ -13,7 +13,7 @@ function solve() {
     if ((currSentance.length == 1)) {
       if (sentancesArr[i + 1] !== undefined) {
         currSentance = currSentance.concat(`.${sentancesArr[i + 1]}`);
-      }
+      } 
       i++;
       // sentanceNum;
       // console.log(currSentance + '     new sentance');
