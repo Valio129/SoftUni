@@ -7,7 +7,6 @@ function itemStorage(arr) {
     arr.forEach(element => {
         [item, quantity] = element.split(' ')
         if (storage.has(item)) {
-            
             let currValue = Number(storage.get(item))
             let newQuan = currValue + Number(quantity)
             storage.set(item, newQuan)

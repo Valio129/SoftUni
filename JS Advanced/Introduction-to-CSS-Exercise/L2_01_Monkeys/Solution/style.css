@@ -1,0 +1,29 @@
+body {
+    background-color: #FAEBC8;
+}
+
+section {
+    -webkit-box-shadow: 2px 1px 13px 7px #000000;
+    box-shadow: 2px 1px 13px 7px #000000;
+    border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+   
+}
+section article {
+    display: inline-block;
+    background-color: aqua;
+    
+}
+section article p {
+   display: inline-block;
+    width:25em ;
+    padding-left: 5% 0% 5% 0%;
+    text-align: left;
+}
+nav ul li {
+    display: inline-block;
+}
+img {
+    width:10em
+}
