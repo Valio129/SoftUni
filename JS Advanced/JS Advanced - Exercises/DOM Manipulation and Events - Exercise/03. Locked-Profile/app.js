@@ -1,39 +1,21 @@
 function lockedProfile() {
-    const main = document.getElementById('main');
-    main.addEventListener('click', revealData);
-    function isActive(e) {
-        const btn = el.parentElement.getElementsByTagName('button')[0];
-        const radioBtns = Array.from(e.target.parentElement.querySelector('input[type="radio"]'));
-        const value = radioBtns.find(btn => btn.checked = true).value;
-        switch (value) {
-            case 'lock':
-                btn.disabled = true;
-                break;
-
-            case 'unlock':
-                btn.disabled = false;
-                break;
-            default:
-                break;
-        }
-    }
-
+    const btns = Array.from(document.querySelectorAll('.profile button'))
+        .forEach(btn => btn.addEventListener('click', revealData));
     function revealData(e) {
         const el = e.target;
-        if (el.tagName == 'BUTTON') {
-            const btn = el;
-            const parentDiv = el.parentElement;
-            parentDiv.addEventListener('load', isActive);
-            const hiddenInfo = Array.from(el.parentElement.children)
-                .find(el => (el.id.toLowerCase()).includes('hidden'));
-            if (hiddenInfo.style.display == 'none') {
-                hiddenInfo.style.display = 'inline-block';
-                btn.textContent = 'Hide it';
+        const isActive = el.parentElement.querySelector('input[type="radio"][value="unlock"').checked;
+        if (isActive) {
+            const hiddenInfo = el.parentElement.querySelector('div');
+            if (el.textContent = 'Show more') {
+                hiddenInfo.style.display = 'block';
+                el.textContent = 'Hide it';
+                // console.log(el.textContent);
+                console.log(hiddenInfo);
             } else {
-                hiddenInfo.style.display = 'none';
-                btn.textContent = 'Show more';
+                hiddenInfo.style.display = '';
+                el.textContent = 'Show more';
+                // console.log(el.textContent);
             }
         }
     }
-    console.log(main);
 }
