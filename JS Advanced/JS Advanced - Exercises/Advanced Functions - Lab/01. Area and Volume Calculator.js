@@ -12,7 +12,9 @@ function solve(area, vol, inputString) {
         for (let key in (objArrElement)) {
             objArrElement[key] = Number(objArrElement[key]);
         }
-        outputArr.push({area: area.call(objArrElement), volume: vol.call(objArrElement)})
+        const calcVol =  vol.bind(objArrElement)
+        outputArr.push({area: area.bind(objArrElement)(), volume: calcVol()})
+
     }
     return outputArr
 }
