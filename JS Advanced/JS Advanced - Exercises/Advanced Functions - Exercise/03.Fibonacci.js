@@ -1,7 +1,7 @@
 function getFibonator() {
     let first = 1;
     let second = 0;
-     function getNum () {
+    function getNum () {
         let temp1 = first + second  ;
          first = second;
          second = temp1;
