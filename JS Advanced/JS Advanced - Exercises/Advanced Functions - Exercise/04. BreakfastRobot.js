@@ -6,13 +6,13 @@ function solution() {
         turkey: { protein: 10, carbohydrate: 10, fat: 10, flavour: 10 },
         apple: { carbohydrate: 1, flavour: 2 },
     };
-    let storage = {
+    const storage = {
         protein: 0,
         carbohydrate: 0,
         fat: 0,
         flavour: 0,
     };
-    commands = {
+   const commands = {
         restock: function (microelement, quantity) {
             const value = storage[microelement];
             storage[microelement] = value + Number(quantity);
@@ -40,7 +40,7 @@ function solution() {
         report: function () {
             let out = [];
             Object.entries(storage).forEach(([element, quant]) => out.push(`${element}=${quant}`));
-            return out.join(' ')
+            return out.join(' ');
         }
     };
     function controller(cmds) {
