@@ -36,8 +36,12 @@ function solve() {
         const task = inputs.filter(el => el.id == 'task').shift()
         const description = inputs.filter(el => el.id == 'description').shift()
         const date = inputs.filter(el => el.id == 'date').shift()
+       
+       
         if (task.value !== '' && description.value !== '' && date.value !== '') { // to do : create output obj and aurtomate the appending of childs
             const article = document.createElement('article');                      // add inputs to arr -> check if every el in the arr satisfies the desctiption
+            
+            
             //generating text
             const taskText = document.createElement('h3');
             taskText.textContent = task.value
@@ -46,7 +50,7 @@ function solve() {
             descText.textContent = `Description: ${description.value}`;
             article.appendChild(descText)
             const dateText = document.createElement('p');
-            dateText.textContent = `Due date: ${task.value}`
+            dateText.textContent = `Due Date: ${date.value}`
             article.appendChild(dateText)
             const div = document.createElement('div')
             div.setAttribute('class', 'flex');
@@ -69,12 +73,8 @@ function solve() {
             date.value = ''
         }
     })   
-            
-    // console.log(addBtn)
 }
 
-     
-// };
 
 
 
