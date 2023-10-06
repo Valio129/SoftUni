@@ -15,6 +15,7 @@ function solve() {
         .filter(el => el.tagName =='DIV')[0]
         console.log(btns);
         btns.children[0].parentNode.removeChild( btns.children[0]);
+        
         const finishBtn = document.createElement('button');
         finishBtn.textContent = 'Finish';
         finishBtn.addEventListener('click', finishTask);
