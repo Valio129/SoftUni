@@ -1,0 +1,20 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "testing mocha and chai",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "testing",
+    "mocha",
+    "chai",
+    "demo"
+  ],
+  "author": "AZ",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.10"
+  }
+}
