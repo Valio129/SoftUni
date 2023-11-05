@@ -30,7 +30,7 @@ class FlightBookingSystem {
         this.bookings.push(currPassengerObj);
         return `Booking for passenger ${passengerName} on flight ${flightNumber} is confirmed.`;
 
-    }
+    } 
     cancelBooking(passengerName, flightNumber) {
         const arr = [passengerName, flightNumber];
 
