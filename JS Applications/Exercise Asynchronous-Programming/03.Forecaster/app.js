@@ -1,33 +1,88 @@
 function attachEvents() {
     const [inputField, submitBtn] = document.getElementById('request').children;
-    // console.log(inputField, submitBtn);
-    const location = inputField.value;
-    submitBtn.addEventListener('click', loadAllData(location));
+    const inputLocation = inputField.value;
+    console.log(inputField, submitBtn, inputLocation);
+    submitBtn.addEventListener('click', loadAllData);
 
-    async function loadAllData(inputLocation) {
+
+    function loadAllData(ev) {
         const baseURl = 'http://localhost:3030/jsonstore/forecaster/locations';
-        const response = await fetch(baseURl);
-        const availableLocationsArr = await response.json();
-        const locationObj = await availableLocationsArr.filter(e => e.name === inputLocation);
-
-        if (locationObj) {
-            const dataObj = await getLocationData(locationObj.code);
+        console.log('started, input is ' + inputField.value);
+        const forecastDiv = document.querySelector('div#forecast');
+        forecastDiv.style.display = '';
+        if (inputField.value == '') {
+            forecastDiv.textContent = 'Error';
+            throw new Error('Error ocasdcureddd');
         }
-        console.log(initialData);
-        async function getLocationData(searchCode) {
-            //create URLs
+        fetch(baseURl)
+            .then(response => response.json())
+            .then(data => {
+                const locationObj = data.find(e => e.name == inputField.value);
+                console.log(locationObj);
+                if (locationObj == undefined) {
+                    throw new Error();
+                }
+
+
+                loadToday(locationObj.code);
+                loadForecast(locationObj.code);
+            }).catch((e) => forecastDiv.textContent = 'Error');
+
+
+        const iconObj = {
+            'Sunny': '☀',
+            'Partly sunny': '⛅',
+            'Overcast': '☁',
+            'Rain': '☂',
+            'Degrees': '°',
+        };
+        function loadToday(searchCode) {
+            //create URL
             const todayURL = 'http://localhost:3030/jsonstore/forecaster/today/' + searchCode;
-            const forecastURL = 'http://localhost:3030/jsonstore/forecaster/upcoming/' + searchCode;
+            fetch(todayURL).then(response => response.json())
+                .then(data => {
+                    // document.querySelector('div#forecast div#current').innerHTML = '';
+                    // document.querySelector('div#forecast div#current').appendChild(e('div', { className: 'forecast-info' }, 'Current conditions'));
+                    document.querySelector('div#forecast div#current').appendChild(
 
-            const today = await fetch(todayURL);
-            const forecast = await fetch(forecastURL);
-            return { today, forecast };
+                        //div#forecasts
+                        e('div', { className: 'forecasts' },
+                            // span.condSymbol · Sunny &#x2600; // ☀   
+                            e('span', { className: 'condition symbol' }, iconObj[data.forecast.condition]),
+                            //span.condition
+                            e('span', { className: 'condition' },
+                                e('span', { className: 'forecast-data' }, data.name),
+                                e('span', { className: 'forecast-data' }, `${data.forecast.low}${iconObj.Degrees}/${data.forecast.high}${iconObj.Degrees}`),
+                                e('span', { className: 'forecast-data' }, data.forecast.condition)
+                            ),
+
+                        )
+                    );
+                });
         }
+
+
+        function loadForecast(searchCode) {
+            //create URL
+            const forecastURL = 'http://localhost:3030/jsonstore/forecaster/upcoming/' + searchCode;
+            fetch(forecastURL).then(response => response.json())
+                .then(data => {
+                    // document.querySelector('div#forecast div#upcoming').innerHTML = '';
+                    const weathers = [];
+                    console.log(data.forecast);
+                    data.forecast.forEach(day => {
+                        weathers.push(
+                            e('span', { className: 'upcoming' },
+                                e('span', { className: 'symbol' }, iconObj[day.condition]),
+                                e('span', { className: 'forecast-data' }, `${day.low}${iconObj.Degrees}/${day.high}${iconObj.Degrees}`),
+                                e('span', { className: 'forecast-data' }, day.condition)
+                            ));
+                    });
+                    document.querySelector('div#forecast div#upcoming').appendChild(e('div', { className: 'forecast-info' }, ...weathers));
+
+                });
+        };
     }
-
-
-
-
     function e(type, attributes, ...content) {
         const result = document.createElement(type);
 
@@ -54,6 +109,9 @@ function attachEvents() {
     }
 }
 
+
+
+
 attachEvents();
 /*
 get data request 
@@ -65,3 +123,15 @@ if request is OK => fetch seconf url
 else / incorrect format => throw (catch) error
 
 */
+
+/*
+· Sunny &#x2600; // ☀
+
+· Partly sunny &#x26C5; // ⛅
+
+· Overcast &#x2601; // ☁
+
+· Rain &#x2614; // ☂
+
+· Degrees &#176; // °*/
+
