@@ -41,11 +41,7 @@ function attachEvents() {
             const todayURL = 'http://localhost:3030/jsonstore/forecaster/today/' + searchCode;
             fetch(todayURL).then(response => response.json())
                 .then(data => {
-                    // document.querySelector('div#forecast div#current').innerHTML = '';
-                    // document.querySelector('div#forecast div#current').appendChild(e('div', { className: 'forecast-info' }, 'Current conditions'));
                     document.querySelector('div#forecast div#current').appendChild(
-
-                        //div#forecasts
                         e('div', { className: 'forecasts' },
                             // span.condSymbol · Sunny &#x2600; // ☀   
                             e('span', { className: 'condition symbol' }, iconObj[data.forecast.condition]),
