@@ -1,3 +1,30 @@
+async function loadUserRecipes() {
+    // const response = await fetch('http://localhost:3030/data/recipes?select=_id%2Cname%2Cimg');
+    const ownerId = await getOnwerId();
+    const recipes = (await getUserRecipes()).filter(r => r.ownerId == ownerId);
+    console.log(recipes);
+    const cards = recipes.map(createRecipePreview);
+    document.querySelector('main').innerHTML = '';
+    cards.forEach(c => document.querySelector('main').appendChild(c));
+
+    async function getUserRecipes() {
+        const response = await fetch('http://localhost:3030/data/recipes?select=_id%2Cname%2Cimg');
+        const recipes = await response.json();
+        console.log(recipes);
+        return recipes;
+    }
+
+    async function getOnwerId() {
+        const response = await fetch('http://localhost:3030/users/me', {
+            method: 'get',
+            headers: {
+                'X-Authorization': sessionStorage.getItem('authToken')
+            }
+        });
+        return await response.json()._id;
+    }
+    // return recipes;
+}
 async function getRecipes() {
     const response = await fetch('http://localhost:3030/jsonstore/cookbook/recipes');
     const recipes = await response.json();
@@ -5,8 +32,8 @@ async function getRecipes() {
     return Object.values(recipes);
 }
 
-async function getRecipeById(id) {
-    const response = await fetch('http://localhost:3030/jsonstore/cookbook/details/' + id);
+async function getRecipeById(id) { //http://localhost:3030/jsonstore/cookbook/details/
+    const response = await fetch('http://localhost:3030/data/recipes/' + id);
     const recipe = await response.json();
 
     return recipe;
@@ -48,13 +75,47 @@ function createRecipeCard(recipe) {
 
 window.addEventListener('load', async () => {
     const main = document.querySelector('main');
-
     const recipes = await getRecipes();
     const cards = recipes.map(createRecipePreview);
 
     main.innerHTML = '';
     cards.forEach(c => main.appendChild(c));
+    // Add validation for logged user
+    if (sessionStorage.getItem('authToken') == null) {
+        revealGuestNav();
+    } else {
+        revealUserNav();
+        loadUserRecipes();
+        // Add ev listener for logout
+        document.getElementById('logoutBtn').addEventListener('click', onLogout);
+
+        function onLogout() {
+            try {
+                fetch('http://localhost:3030/users/logout', {
+                    method: 'get',
+                    headers: { 'X-Authorization': sessionStorage.getItem('authToken') }
+                });
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.log(error);
+            }
+        }
+    }
+
 });
+// Check if the user is logged in
+function revealGuestNav() {
+    document.getElementById('guest').style.display = 'inline-block';
+    document.getElementById('user').style.display = 'none';
+}
+function revealUserNav() {
+    document.getElementById('guest').style.display = 'none';
+    document.getElementById('user').style.display = 'inline-block';
+}
+
+// Log out the user
+// fetch to clear the sessionStorage
 
 function e(type, attributes, ...content) {
     const result = document.createElement(type);

@@ -12,10 +12,13 @@ function attachEvents() {
 
     function loadPostAndComments() {
         const selectedPost = select.querySelector('option:checked')
+        //fetch for the post body
+        console.log( selectedPost.value);
+
         fetch('http://localhost:3030/jsonstore/blog/posts/'+ selectedPost.value).then(response=> response.json())
         .then(data => {
             postBody.innerHTML = ''
-            postBody.appendChild(e('p',{},data.body))
+            postBody.textContent = data.body
             postTitle.textContent = data.title
         })
         fetch('http://localhost:3030/jsonstore/blog/comments/').then(response=> response.json())
@@ -24,17 +27,19 @@ function attachEvents() {
             const filteredData = Object.values(data).filter(comment => comment.postId == selectedPost.value)
             postComments.innerHTML=''
             for (const comment of filteredData) {
-                postComments.appendChild(e('li',{id:comment.postId}, comment.text))     
+                postComments.appendChild(e('li',{id:comment.id}, comment.text))     
             }
             
         })
     }
     function loadPosts(event) {
+        select.innerHTML = ''
         fetch('http://localhost:3030/jsonstore/blog/posts').then(response=> response.json())
         .then(data => {
             for (const key in data) {
                 const dataObj = data[key]
-                select.appendChild(e('option',{value: key}, dataObj.title))
+                console.log(dataObj.title);
+                select.appendChild(e('option',{value: dataObj.id}, dataObj.title))
             }
         })
 
