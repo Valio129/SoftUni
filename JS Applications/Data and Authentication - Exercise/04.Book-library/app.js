@@ -1,4 +1,4 @@
-//*x  initialization
+//x  initialization
 const tbody = document.querySelector('tbody');
 const createForm = document.getElementById('createForm');
 const editForm = document.getElementById('editForm');
@@ -12,6 +12,7 @@ tbody.addEventListener('click', onTableClick);
 async function onEditSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
+    
     const title = formData.get('title');
     const author = formData.get('author');
     const id = formData.get('id');
@@ -24,6 +25,15 @@ async function onEditSubmit(event) {
 
     loadBooks();
 }
+
+async function updateBook(id, book) {
+    const result = await request('http://localhost:3030/jsonstore/collections/books/' + id, {
+        "method": 'PUT',
+        "body": JSON.stringify(book)
+    });
+    return result;
+}
+
 
 function onTableClick(event) {
     if (event.target.className == 'delete') {
@@ -52,12 +62,12 @@ async function loadBookById(id) {
 
 async function onDelete(button) {
     const id = button.parentElement.dataset.id;
-    console.log(id);
+    // console.log(id);
     await deleteBook(id);
     button.parentElement.parentElement.remove();
 }
 async function deleteBook(id) {
-    console.log(id);
+    // console.log(id);
     const result = await request('http://localhost:3030/jsonstore/collections/books/' + id, {
         "method": 'DELETE'
     });
@@ -73,6 +83,15 @@ async function onCreate(event) {
     tbody.appendChild(createRow(result._id, result));
     event.target.reset(); // clears fomr's input fields
 }
+
+async function createBook(book) {
+    const result = await request('http://localhost:3030/jsonstore/collections/books', {
+        "method": 'POST',
+        "body": JSON.stringify(book)
+    });
+    return result;
+}
+
 
 
 async function request(url, options) {
@@ -113,22 +132,8 @@ function createRow(id, book) {
 }
 
 
-async function createBook(book) {
-    const result = await request('http://localhost:3030/jsonstore/collections/books', {
-        "method": 'POST',
-        "body": JSON.stringify(book)
-    });
-    return result;
-}
 
 
-async function updateBook(id, book) {
-    const result = await request('http://localhost:3030/jsonstore/collections/books/' + id, {
-        "method": 'PUT',
-        "body": JSON.stringify(book)
-    });
-    return result;
-}
 
 
 
@@ -141,7 +146,9 @@ x load all books
 x create book
 x update book
 x deletebook
+
 x handle edit form
 x handle create form
 x handle delete btn
+x handle edit btn
 */
