@@ -1,4 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('token')) {
+        document.getElementById('guest').style.display = 'none';
+        document.getElementById('user').style.display = '';
+    } else {
+        document.getElementById('guest').style.display = '';
+        document.getElementById('user').style.display = 'none';
+    }
     const form = document.querySelector('form');
    
     form.addEventListener('submit', onSubmit);
@@ -31,6 +38,8 @@ async function createUser(user) {
             'body': JSON.stringify(user)
         });
         const token = result.accessToken;
+        sessionStorage.setItem('id', result._id);
+        sessionStorage.setItem('email', result.email);
         sessionStorage.setItem('token', token); 
         window.location.href = 'index.html'
     } catch (error) {
