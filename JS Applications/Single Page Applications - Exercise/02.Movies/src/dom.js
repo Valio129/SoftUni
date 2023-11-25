@@ -2,7 +2,7 @@ const main = document.querySelector('main');
 export function showView(section) {
     main.replaceChildren(section)
 }
-function e(type, attributes, ...content) {
+export function e(type, attributes, ...content) {
     const result = document.createElement(type);
 
     for (let [attr, value] of Object.entries(attributes || {})) {

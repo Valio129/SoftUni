@@ -9,3 +9,8 @@ section.remove();
 export function showRegister() {
     showView(section)
 }
+// get input fields 
+// make a request 
+// get response data 
+// update the DOM structure
+// save user token and email 

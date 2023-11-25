@@ -1,33 +1,81 @@
+import { showView } from "./dom.js";
+// import { showCreate } from "./create.js";
+// import { showEdit } from "./edit.js";
+// import { showCreate } from "./create.js";
+import { showHome } from "./home.js";
+import { showLogin } from "./login.js";
+import { showRegister } from "./register.js";
+// import { showMovieDetails } from "./details.js";
 /** 
+ * 
 * Functionality to implement:
 * 
 * create placeholder modules for every view 
 * configure and test navigation
 * implement modules
 *  - create async functions for request
-*  - implement DOM logic
 *  
+*/
+//- implement DOM logic
+const nav = document.querySelector('nav');
+const views = {
+    "homeLink": showHome,
+    "loginLink": showLogin,
+    "registerLink": showRegister,
+};
+
+nav.addEventListener('click', (event) => {
+    if (event.target.tagName == 'A') {
+        const view = views[event.target.id];
+        if (typeof view == 'function') {
+            view();
+        }
+    }
+});
+document.getElementById('logoutBtn').addEventListener('click', onLogout);
+
+export function updateNav() {
+    const userData = JSON.parse(sessionStorage.getItem('userData'));
+    if (userData !== null) {
+        [...nav.querySelectorAll('li.user')].forEach(e => e.style.display = 'block');
+        [...nav.querySelectorAll('li.guest')].forEach(e => e.style.display = 'none');
+    } else {
+        [...nav.querySelectorAll('li.user')].forEach(e => e.style.display = 'none');
+        [...nav.querySelectorAll('li.guest')].forEach(e => e.style.display = 'block');
+    }
+}
+async function onLogout(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const {token} = JSON.parse(sessionStorage.getItem('userData'))
+    await fetch('http://localhost:3030/users/logout', {
+        headers: {
+            'X-Authorization' : token
+        }
+    })
+    sessionStorage.removeItem('userData');
+    updateNav();
+    showLogin();
+}
+/*
  * Order of views: Easy -> Hard
- * - catalog(home view)
- * - login/register
+ * X catalog(home view)
+ * X login/register
+ * X logout
  * - create
  * - details
- * - likes 
- * - edit 
+ * - likes
+ * - edit
  * - delete
- * - 
+ * -
  */
 
-import { showView } from "./dom.js";
-import { showCreate } from "./create.js";
-import { showEdit } from "./edit.js";
-import { showHome } from "./home.js";
-import { showLogin } from "./login.js";
-import { showMovieDetails } from "./details.js";
-import {showRegister } from "./register.js"
-// showHome();
 // showLogin();
 // showCreate();
 // showEdit();
 // showMovieDetails();
 // showRegister();
+// Start application in home view/ catalog
+updateNav();
+showHome();
+window.updateNav = updateNav;
