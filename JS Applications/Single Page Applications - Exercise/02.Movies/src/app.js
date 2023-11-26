@@ -36,12 +36,19 @@ document.getElementById('logoutBtn').addEventListener('click', onLogout);
 
 export function updateNav() {
     const userData = JSON.parse(sessionStorage.getItem('userData'));
+
     if (userData !== null) {
+        updateUserMessage();
         [...nav.querySelectorAll('li.user')].forEach(e => e.style.display = 'block');
         [...nav.querySelectorAll('li.guest')].forEach(e => e.style.display = 'none');
     } else {
         [...nav.querySelectorAll('li.user')].forEach(e => e.style.display = 'none');
         [...nav.querySelectorAll('li.guest')].forEach(e => e.style.display = 'block');
+    }
+
+    function updateUserMessage() {
+        const userEmail = userData.email;
+        nav.querySelector('#welcomeMsg').textContent = `Welcome, ${userEmail}`;
     }
 }
 async function onLogout(event) {
@@ -60,13 +67,15 @@ async function onLogout(event) {
 /*
  * Order of views: Easy -> Hard
  * X catalog(home view)
- * X login/register
+ * X Welcome message
+ * X login
+ * X register
  * X logout
- * - create
- * - details
- * - likes
- * - edit
- * - delete
+ * X create
+ * X details
+ * X likes
+ * X edit
+ * X delete
  * -
  */
 
